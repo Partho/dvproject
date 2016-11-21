@@ -1,2 +1,3 @@
-# dvproject
-Data Visualization project
+# Data Visualization Project
+
+Visual Analtytics system for WebMD dataset.
