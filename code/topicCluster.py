@@ -1,3 +1,5 @@
+# Author : Ponarasu Subramanian
+
 import json
 import ujson
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -76,7 +78,7 @@ chloride-questions
 
 [['"Hi If its this Benzalkonium chloride, then yes is has a bad name in the eye world, can cause dry eye symptoms, so not so good for you. But if you google your answer, your find some interesting stuff to read. Good Luck \\"'], ['"This is most-likely your chemistry homework, so I would suggest that you do your research and find those uses. It would be too extensive to answer this question via this forum. \\"']]
 
-''''
+'''
 
     # cosine similarity
     #vect = TfidfVectorizer(min_df=1)

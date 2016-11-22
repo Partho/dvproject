@@ -1,3 +1,5 @@
+// Author : Partho Mandal
+
 //Run mongo <dbname> command.js > output.json
 
 //Performs outer join in MongoDB
