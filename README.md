@@ -5,7 +5,7 @@ Visual Analtytics system for WebMD dataset.
 Group Members:
 -------------
 
-* Partho Mandal (@parthoiiitm)
+* Partho Mandal
 * Ponarasu Subramanian
 * Sameeran Rao
 * Utkarsh Soni
