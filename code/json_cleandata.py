@@ -121,11 +121,11 @@ def returnJson(source):
 
 def main():
 
-    source = 'output.json'
+    source = '../data/output.json'
     topic_dict = dataTransform(source)
     topic_dict_final = dictCleaning(topic_dict)
 
-    with open('cleaned_output.json', 'wb') as fp:
+    with open('../data/cleaned_output.json', 'wb') as fp:
         json.dump(topic_dict_final, fp)
 
     print "Cleaned data stored in cleaned_output.json"
