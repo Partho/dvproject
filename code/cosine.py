@@ -1,8 +1,8 @@
-import pprint
-import re
-import codecs
 import json
-import string
+import codecs
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pickle
 
 
 def readJson(source):
@@ -16,20 +16,22 @@ def readJson(source):
 
 def main():
 
-    source = '../data/cleaned_output1.json'
+    # Read JSON file
+    source = '../data/cleaned_output.json'
     topic_dict = readJson(source)
+    
+    # Create TF - IDF matrix
+    vectorizer = TfidfVectorizer()
+    tfidf = vectorizer.fit_transform(topic_dict.values())
 
-    for key, value in topic_dict.items():
-        print "KEY: ", key
-        print "VALUE: ", value
-        print "_______________"
-        print ""
+    # Compute cosine similarity
+    cosine_matrix = (1.0000 - np.around((tfidf * tfidf.T).A, decimals=5))*100.0000
+    pickle.dump(cosine_matrix, open( "../data/cosine.p", "wb" ) )
 
-
-    with open('../data/cleaned_output2.json', 'wb') as fp:
-        json.dump(topic_dict, fp)
+    ## Print cosine distance matrix
+    # cosine = pickle.load(open( "cosine.p", "rb" ) )
+    # print cosine
 
 
 if __name__ == "__main__":
-    
     main()
