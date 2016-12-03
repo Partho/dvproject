@@ -6,7 +6,7 @@ Group Members:
 -------------
 
 * Partho Mandal
-* Ponarasu Subramanian
+* Pon arasu Neranj Subramanian
 * Sameeran Rao
 * Utkarsh Soni
 
