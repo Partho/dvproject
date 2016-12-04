@@ -1,89 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>WebMD Analytics</title>
   <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
   <link rel="stylesheet" href="./lib/css/keen-dashboards.css">
   <link rel="stylesheet" href="./lib/css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Arimo|Quicksand" rel="stylesheet" type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,200italic,600italic&subset=latin,vietnamese' rel='stylesheet'
+    type='text/css'>
+
   <script src="./lib/js/jquery.min.js"></script>
   <script src="./lib/js/bootstrap.min.js"></script>
   <script src="./lib/js/holder.js"></script>
   <script src="./lib/js/d3.v3.js"></script>
   <script src="./lib/js/crossfilter.js"></script>
 
+  <script src="http://phuonghuynh.github.io/js/bower_components/d3-transform/src/d3-transform.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/cafej/src/extarray.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/cafej/src/misc.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/cafej/src/micro-observer.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/microplugin/src/microplugin.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/bubble-chart.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/central-click/central-click.js"></script>
+  <script src="http://phuonghuynh.github.io/js/bower_components/bubble-chart/src/plugins/lines/lines.js"></script>
 
 
 
-<!--css and javascript scripts for portion 1 and 6-->
-<!--
+  <!--css and javascript scripts for portion 1 and 6-->
+  <!--
         <script type="text/javascript" src="javascript_files/jquery-3.1.1.js"></script>
         <script type="text/javascript" src="d3/d3.js"></script>
 -->
-        <script type="text/javascript" src="lib/js/global_topic.js"></script>
-        <script type="text/javascript" src="lib/js/live_search.js"></script>
-        <script type="text/javascript" src="lib/js/star.js"></script>
-        <link href="lib/css/all-properties.css" rel="stylesheet">
+  <script type="text/javascript" src="lib/js/global_topic.js"></script>
+  <script type="text/javascript" src="lib/js/live_search.js"></script>
+  <script type="text/javascript" src="lib/js/star.js"></script>
+  <script type="text/javascript" src="lib/js/bubble.js"></script>
+  <link href="lib/css/all-properties.css" rel="stylesheet">
 
-<!--css and javascript scripts for portion 1 and 6-->
-
-
-<!--    javacript files for portion2-->
-    <script type="text/javascript" src="lib/js/portion_2.js"></script>
-    <script type="text/javascript" src="lib/js/testj.js"></script>
-    <script type="text/javascript" src="lib/js/savage.toggle-switch.min.js"></script>
+  <!--css and javascript scripts for portion 1 and 6-->
 
 
-    <script src="./lib/js/load_data.js"></script>
+  <!--    javacript files for portion2-->
+  <script type="text/javascript" src="lib/js/portion_2.js"></script>
+  <script type="text/javascript" src="lib/js/testj.js"></script>
+  <script type="text/javascript" src="lib/js/savage.toggle-switch.min.js"></script>
 
-    <style>
+
+  <script src="./lib/js/load_data.js"></script>
+
+  <style>
     .toolTip {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        position: absolute;
-        display: none;
-        width: auto;
-        height: auto;
-        background: none repeat scroll 0 0 white;
-        border: 0 none;
-        border-radius: 8px 8px 8px 8px;
-        box-shadow: -3px 3px 15px #888888;
-        color: black;
-        /*font: 12px sans-serif;*/
-        padding: 5px;
-        text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      position: absolute;
+      display: none;
+      width: auto;
+      height: auto;
+      background: none repeat scroll 0 0 white;
+      border: 0 none;
+      border-radius: 8px 8px 8px 8px;
+      box-shadow: -3px 3px 15px #888888;
+      color: black;
+      /*font: 12px sans-serif;*/
+      padding: 5px;
+      text-align: center;
     }
-
-
-    .axisHorizontal path{
-        fill: none;
+    
+    .axisHorizontal path {
+      fill: none;
     }
-
+    
     .axisHorizontal .tick line {
-        stroke-width: 1;
-        stroke: rgba(0, 0, 0, 0.2);
+      stroke-width: 1;
+      stroke: rgba(0, 0, 0, 0.2);
     }
-
+    
     .area {
       fill: steelblue;
       clip-path: url(#clip);
     }
-
+    
     .axis path,
     .axis line {
       fill: none;
       stroke: #000;
       shape-rendering: crispEdges;
     }
-
+    
     .brush .extent {
       stroke: #fff;
       fill-opacity: .125;
       shape-rendering: crispEdges;
     }
-
-
-    </style>
+  </style>
 
 
 
@@ -91,7 +101,7 @@
 
 <body class="application" style="padding: 0px;">
 
-<!--
+  <!--
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -102,106 +112,127 @@
 -->
   <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6">
-            <div class="chart-wrapper">
-              <div class="chart-title">
-                <b>Select topic for Analysis</b>
-              </div>
-              <div class="chart-stage">
-                  <div class="portion1"><!-- style="height: 250px; -->
-                <form role="form">
-                    <div class="table-title">
-                      <input type="text" class="form-control input-lg" id="portion1_search" placeholder="Search over 1500 topics.. e.g. Lung cancer">
-                    </div>
-                    <div id="portion1_topic_error">Sorry no topic found</div>
-                      <div id="portion1_topic_list" style="height: 360px;">
-                          <table class="table-fill">
-                          <thead>
-                            <tr>
-                                <th class="text-left">Topic</th>
-                                <th class="text-left">No: of questions</th>
-                            </tr>
-                          </thead>
-                              <tbody id="portion1_search_results" class="table-hover">
 
-                              </tbody>
-                          </table>
-                            <script>
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <b>Select topic for Analysis</b>
+          </div>
+          <div class="chart-stage">
+            <div class="portion1">
+              <!-- style="height: 250px; -->
+              <form role="form">
+                <div class="table-title">
+                  <input type="text" class="form-control input-lg" id="portion1_search" placeholder="Search over 1500 topics.. e.g. Lung cancer">
+                </div>
+                <div id="portion1_topic_error">Sorry no topic found</div>
+                <div id="portion1_topic_list" style="height: 360px;">
+                  <table class="table-fill">
+                    <thead>
+                      <tr>
+                        <th class="text-left">Topic</th>
+                        <th class="text-left">No: of questions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="portion1_search_results" class="table-hover">
+
+                    </tbody>
+                  </table>
+                  <script>
+
 
 
                             </script>
-                      </div>
-                </form>
+                </div>
+              </form>
+            </div>
+
+          </div>
         </div>
-
-              </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <b>Most Popular Questions in the topic</b>
+          </div>
+          <div class="chart-stage">
+            <div id="viz_3_4" style="height: 400px; width:480;position: relative">
             </div>
           </div>
-        <div class="col-sm-6">
-            <div class="chart-wrapper">
-              <div class="chart-title">
-                <b>Most Popular Questions in the topic</b>
-              </div>
-              <div class="chart-stage">
-                  <div id="viz_3_4" style="height: 400px; width:480;position: relative" >
-                  </div>
-              </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6" style="height:650px">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            <b>Similar Topics</b>
+          </div>
+          <div class="chart-stage" style="height: 600px;">
+            <!-- style="height: 365px; -->
+            <div id="viz">
+              <div id="defaultOn" style="position:absolute;width:150px;height:30px;top:20;right:0;"></div>
             </div>
           </div>
 
+        </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-6" style="height:650px">
-            <div class="chart-wrapper">
-              <div class="chart-title">
-                <b>Similar Topics</b>
-              </div>
-              <div class="chart-stage" style="height: 600px;" ><!-- style="height: 365px; -->
-                  <div id="viz">
-                    <div id="defaultOn" style="position:absolute;width:150px;height:30px;top:20;right:0;"></div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
+
+      <div class="col-lg-6">
+        
+          <div class="col-lg-12">
             <div class="chart-wrapper">
               <div class="chart-title">
                 <b>Topic Classification</b>
               </div>
+              <div class="btn-group">
+                <button type="button" id="DiseaseClick" class="btn btn-primary drawChart">Disease</button>
+                <button type="button" id="SymptomsClick" class="btn btn-primary drawChart">Symptoms</button>
+                <button type="button" id="MedicineClick" class="btn btn-primary drawChart">Medicine</button>
+                <button type="button" id="OthersClick" class="btn btn-primary drawChart">Others</button>
+              </div>
               <div class="chart-stage">
+                <div class="bubbleChart" />
               </div>
             </div>
-          </div><div class="col-sm-6">
+          </div>
+        
+        
+          <div class="col-lg-12">
             <div class="chart-wrapper">
               <div class="chart-title">
                 <b>Most Helpful Users</b>
               </div>
               <div class="chart-stage">
-                    <div class="portion6">
-                            <div id="portion6_user_error">Sorry no answers exist</div>
-                            <svg id="portion6_svg" width="100%" height="100%">
-                            <rect x="0" y="0" width="100%" height="100%" fill="#008080"/>
-                            <image xlink:href="./lib/img/stars.png" x="0" y="0" height="100%" width="100%"></image>
+                <div class="portion6">
+                  <div id="portion6_user_error">Sorry no answers exist</div>
+                  <svg id="portion6_svg" width="100%" height="100%">
+                    <rect x="0" y="0" width="100%" height="100%" fill="#008080" />
+                    <image xlink:href="./lib/img/stars.png" x="0" y="0" height="100%" width="100%"></image>
 
-            <!--
+                    <!--
                             <rect x="147px" y="54px" width="50px" height="60px" fill="red"></rect>
                             <rect x="279px" y="54px" width="50px" height="60px" fill="red"></rect>
                             <rect x="409px" y="53px" width="50px" height="60px" fill="red"></rect>
             -->
 
-                        </svg>
-<!--                        <script type="text/javascript" src="javascript_files/star.js"></script>-->
-                    </div>
+                  </svg>
+                  <!--                        <script type="text/javascript" src="javascript_files/star.js"></script>-->
                 </div>
+              </div>
             </div>
           </div>
+        
 
+        
       </div>
-</div>
+    </div>
+  </div>
+  </div>
 
 
-    <hr>
+  <hr>
   <script>
     Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
   </script>
@@ -209,4 +240,5 @@
   <script src="./static/lib/js/meta.js"></script>
 
 </body>
+
 </html>
